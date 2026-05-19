@@ -1,0 +1,947 @@
+/* ═══════════════════════════════════════════════════════════
+   PORTFOLIO.CSS — Сетка проектов + Кейс-модал
+   Сталь Крафт
+═══════════════════════════════════════════════════════════ */
+
+/* ══════════════════════════════════════════════════════════
+   1. СЕТКА КАРТОЧЕК
+══════════════════════════════════════════════════════════ */
+
+.sc-pcard {
+  background: rgb(13,13,28);
+  border: 1px solid rgba(255,255,255,.08);
+  border-radius: 16px;
+  overflow: hidden;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  transition: transform .22s ease, box-shadow .22s ease;
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
+}
+.sc-pcard:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 20px 56px rgba(0,0,0,.55);
+}
+.sc-pcard:focus-visible {
+  outline: 2px solid rgba(108,99,255,.8);
+  outline-offset: 3px;
+}
+.sc-pcard:active {
+  transform: translateY(-2px);
+}
+
+/* ── Фото-область ────────────────────────────────────────── */
+.sc-pcard-photo {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  background: rgb(7,7,18);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.sc-pcard-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+  transition: transform .4s ease;
+  will-change: transform;
+}
+.sc-pcard:hover .sc-pcard-photo img {
+  transform: scale(1.05);
+}
+
+/* Плашка категории */
+.sc-pcard-cat-badge {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  z-index: 2;
+  font-size: .68rem;
+  font-weight: 700;
+  letter-spacing: .3px;
+  padding: 4px 11px;
+  border-radius: 99px;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  white-space: nowrap;
+}
+
+/* Градиент снизу */
+.sc-pcard-photo::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, transparent 40%, rgba(4,4,14,.55) 100%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Цветная полоска */
+.sc-pcard-photo-stripe {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  z-index: 3;
+}
+
+/* Placeholder в карточке */
+.sc-pcard-photo .sc-slide-placeholder {
+  min-height: 0;
+  height: 100%;
+  width: 100%;
+  padding: 24px;
+  color: rgba(255,255,255,.15);
+  font-size: .75rem;
+  gap: 10px;
+}
+.sc-pcard-photo .sc-slide-placeholder svg {
+  opacity: .12;
+  width: 40px;
+  height: 40px;
+}
+
+/* ── Нижняя строка ───────────────────────────────────────── */
+.sc-pcard-foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 14px 16px 15px;
+  background: rgb(13,13,28);
+  flex-shrink: 0;
+}
+.sc-pcard-foot-title {
+  font-size: .85rem;
+  font-weight: 700;
+  color: rgb(215,215,240);
+  line-height: 1.4;
+  flex: 1;
+  min-width: 0;
+}
+.sc-pcard-foot-arrow {
+  flex-shrink: 0;
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
+  background: rgba(255,255,255,.06);
+  border: 1px solid rgba(255,255,255,.08);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: .55;
+  transition: opacity .2s, transform .2s, background .2s;
+}
+.sc-pcard:hover .sc-pcard-foot-arrow {
+  opacity: 1;
+  transform: translateX(2px);
+  background: rgba(255,255,255,.12);
+}
+
+/* ══════════════════════════════════════════════════════════
+   2. ОВЕРЛЕЙ МОДАЛА
+══════════════════════════════════════════════════════════ */
+
+#case-modal-ovl {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: rgba(4,4,14,.88);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  /* ВАЖНО: overflow скроллит сам оверлей на маленьких экранах */
+  overflow-y: auto;
+  opacity: 0;
+  transition: opacity .22s ease;
+}
+@supports (backdrop-filter: blur(1px)) {
+  #case-modal-ovl {
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    background: rgba(4,4,14,.75);
+  }
+}
+#case-modal-ovl.sc-visible {
+  opacity: 1;
+}
+
+/* ══════════════════════════════════════════════════════════
+   3. ОКНО МОДАЛА
+══════════════════════════════════════════════════════════ */
+
+#case-modal-box {
+  position: relative;
+  background: rgb(11,11,24);
+  border: 1px solid rgba(255,255,255,.09);
+  border-radius: 20px;
+  width: 100%;
+  max-width: 960px;
+
+  /* КЛЮЧЕВОЕ ИСПРАВЛЕНИЕ:
+     Используем grid с фиксированной высотой строки,
+     чтобы обе колонки были одинаковой высоты */
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  /* Высота окна — не более 88vh */
+  height: min(88vh, 700px);
+  /* overflow hidden — обрезает углы */
+  overflow: hidden;
+
+  box-shadow: 0 40px 120px rgba(0,0,0,.75), 0 0 0 1px rgba(255,255,255,.04) inset;
+  transform: scale(.94) translateY(16px);
+  transition: transform .3s cubic-bezier(.34,1.2,.64,1);
+
+  /* Чтобы модал не ужимался на маленьких экранах */
+  flex-shrink: 0;
+}
+#case-modal-ovl.sc-visible #case-modal-box {
+  transform: scale(1) translateY(0);
+}
+
+/* ── Кнопка закрытия ─────────────────────────────────────── */
+#case-close-btn {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  z-index: 20;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: rgba(255,255,255,.08);
+  border: 1px solid rgba(255,255,255,.12);
+  color: rgba(255,255,255,.65);
+  font-size: 16px;
+  line-height: 1;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background .15s, color .15s, transform .15s;
+}
+#case-close-btn:hover {
+  background: rgba(255,255,255,.18);
+  color: #fff;
+  transform: scale(1.08);
+}
+
+/* ══════════════════════════════════════════════════════════
+   4. ГАЛЕРЕЯ — левая колонка
+   КЛЮЧЕВЫЕ ИСПРАВЛЕНИЯ:
+   - колонка занимает всю высоту окна
+   - трек — flex без transition на высоту
+   - слайды — строго 100% ширины и высоты трека
+══════════════════════════════════════════════════════════ */
+
+#case-gallery-col {
+  /* Занимает всю высоту окна модала */
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
+  background: rgb(7,7,18);
+  border-right: 1px solid rgba(255,255,255,.06);
+  /* Минимальная высота — чтобы не схлопнуться */
+  min-height: 0;
+}
+
+/* Viewport — занимает оставшееся пространство после точек */
+#case-gallery-viewport {
+  position: relative;
+  overflow: hidden;
+  /* flex:1 — растягивается на всё доступное */
+  flex: 1;
+  min-height: 0;
+  /* cursor при зуме */
+  cursor: zoom-in;
+}
+
+/* ТРЕК:
+   - display:flex — слайды в ряд
+   - height:100% — занимает всю высоту viewport
+   - НЕ меняем высоту при transition — только transform */
+#case-gallery-track {
+  display: flex;
+  flex-direction: row;
+  /* Высота = высота viewport */
+  height: 100%;
+  /* Ширина = 100% * кол-во слайдов (управляется JS через transform) */
+  /* НЕ задаём width здесь — каждый слайд min-width:100% */
+  transition: transform .38s cubic-bezier(.25,.8,.25,1);
+  will-change: transform;
+}
+
+/* СЛАЙД — строго 100% ширины viewport и 100% высоты трека */
+.sc-slide {
+  /* Не сжиматься и не растягиваться */
+  flex: 0 0 100%;
+  width: 100%;
+  height: 100%;
+  /* Центрируем картинку */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  position: relative;
+}
+
+/* Картинка слайда — cover на весь слайд */
+.sc-slide img {
+  /* Занимаем 100% слайда */
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+  pointer-events: none;
+  /* Плавный переход при зуме */
+  transition: transform .3s ease;
+  transform-origin: center center;
+}
+
+/* Зум по клику — управляется JS-классом */
+#case-gallery-viewport.zoomed {
+  cursor: zoom-out;
+  overflow: hidden;
+}
+#case-gallery-viewport.zoomed .sc-slide img {
+  transform: scale(1.9);
+  cursor: zoom-out;
+}
+
+/* Placeholder слайда */
+.sc-slide-placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  color: rgba(255,255,255,.18);
+  font-size: 13px;
+  width: 100%;
+  height: 100%;
+  min-height: 200px;
+  padding: 40px;
+  text-align: center;
+  line-height: 1.55;
+}
+.sc-slide-placeholder svg {
+  opacity: .15;
+  flex-shrink: 0;
+}
+
+/* ── Кнопки-стрелки ──────────────────────────────────────── */
+.sc-arr {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: rgba(0,0,0,.45);
+  border: 1px solid rgba(255,255,255,.2);
+  color: #fff;
+  cursor: pointer;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background .15s, transform .15s;
+  flex-shrink: 0;
+  /* Не даём стрелкам триггерить зум */
+  pointer-events: all;
+}
+.sc-arr:hover {
+  background: rgba(0,0,0,.7);
+  transform: translateY(-50%) scale(1.1);
+}
+.sc-arr:disabled {
+  opacity: .2;
+  pointer-events: none;
+  cursor: default;
+}
+.sc-arr-prev { left: 10px; }
+.sc-arr-next { right: 10px; }
+
+/* Счётчик */
+#case-gal-counter {
+  position: absolute;
+  bottom: 12px;
+  right: 12px;
+  z-index: 5;
+  background: rgba(0,0,0,.6);
+  color: rgba(255,255,255,.8);
+  font-size: 11px;
+  font-weight: 500;
+  padding: 3px 10px;
+  border-radius: 20px;
+  pointer-events: none;
+  display: none;
+  backdrop-filter: blur(4px);
+}
+
+/* ── Точки-индикаторы ────────────────────────────────────── */
+#case-gal-dots {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+  /* Фиксированная высота — не сжимается */
+  height: 36px;
+  flex-shrink: 0;
+  background: rgb(7,7,18);
+  padding: 0 16px;
+}
+.sc-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: rgba(255,255,255,.22);
+  cursor: pointer;
+  border: none;
+  padding: 0;
+  transition: all .22s ease;
+  flex-shrink: 0;
+}
+.sc-dot.active {
+  background: rgba(255,255,255,.9);
+  width: 18px;
+  border-radius: 3px;
+}
+.sc-dot:hover:not(.active) {
+  background: rgba(255,255,255,.5);
+}
+
+/* ══════════════════════════════════════════════════════════
+   5. КОНТЕНТ — правая колонка
+══════════════════════════════════════════════════════════ */
+
+#case-content-col {
+  /* Скролл только в правой колонке */
+  overflow-y: auto;
+  height: 100%;
+  padding: 28px 26px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255,255,255,.1) transparent;
+}
+#case-content-col::-webkit-scrollbar {
+  width: 4px;
+}
+#case-content-col::-webkit-scrollbar-thumb {
+  background: rgba(255,255,255,.1);
+  border-radius: 4px;
+}
+
+/* ── Шапка ───────────────────────────────────────────────── */
+.cc-header-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.cc-badge {
+  font-size: .72rem;
+  font-weight: 700;
+  letter-spacing: .3px;
+  padding: 4px 12px;
+  border-radius: 99px;
+  white-space: nowrap;
+}
+.cc-title {
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: rgb(235,235,255);
+  line-height: 1.35;
+  margin: 0;
+  letter-spacing: -.1px;
+}
+
+/* ── Конверсионный блок ──────────────────────────────────── */
+.cc-conv-block {
+  background: rgba(255,255,255,.03);
+  border: 1px solid rgba(255,255,255,.07);
+  border-radius: 14px;
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.cc-conv-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-size: .75rem;
+  font-weight: 700;
+  letter-spacing: .2px;
+  padding: 6px 14px;
+  border-radius: 99px;
+  align-self: flex-start;
+  white-space: nowrap;
+}
+.cc-conv-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+}
+.cc-conv-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: .8rem;
+  color: rgb(168,168,198);
+  line-height: 1.55;
+}
+.cc-conv-dot {
+  flex-shrink: 0;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  margin-top: 6px;
+}
+
+/* ── Кнопки ──────────────────────────────────────────────── */
+.cc-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: auto;
+  padding-top: 4px;
+}
+.cc-btn-primary {
+  width: 100%;
+  height: 48px;
+  border-radius: 10px;
+  border: none;
+  font-size: .88rem;
+  font-weight: 700;
+  letter-spacing: .15px;
+  cursor: pointer;
+  transition: opacity .15s, transform .15s, box-shadow .15s;
+  font-family: inherit;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+.cc-btn-primary:hover {
+  opacity: .88;
+  transform: translateY(-1px);
+  box-shadow: 0 8px 24px rgba(0,0,0,.35);
+}
+.cc-btn-primary:active {
+  transform: translateY(0);
+}
+.cc-btn-tg {
+  width: 100%;
+  height: 44px;
+  border-radius: 10px;
+  background: rgba(34,158,217,.12);
+  border: 1px solid rgba(34,158,217,.28);
+  color: rgb(34,158,217);
+  font-size: .82rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: background .15s, border-color .15s, transform .15s;
+  text-decoration: none;
+  font-family: inherit;
+}
+.cc-btn-tg:hover {
+  background: rgba(34,158,217,.22);
+  border-color: rgba(34,158,217,.5);
+  transform: translateY(-1px);
+}
+.cc-hint {
+  font-size: .72rem;
+  color: rgb(74,74,106);
+  text-align: center;
+  line-height: 1.5;
+  margin: 0;
+  padding: 0 4px;
+}
+
+/* ══════════════════════════════════════════════════════════
+   6. АДАПТИВНОСТЬ
+══════════════════════════════════════════════════════════ */
+
+/* ── Планшет ≤1024px ─────────────────────────────────────── */
+@media (max-width: 1024px) {
+  #case-modal-box {
+    /* Одна колонка — галерея сверху, контент снизу */
+    grid-template-columns: 1fr;
+    grid-template-rows: 280px 1fr;
+    height: min(92vh, 680px);
+    border-radius: 16px;
+  }
+  #case-gallery-col {
+    height: 100%;
+    border-right: none;
+    border-bottom: 1px solid rgba(255,255,255,.06);
+  }
+  #case-content-col {
+    height: 100%;
+    padding: 20px 22px;
+    gap: 14px;
+  }
+}
+
+/* ── Мобильный ≤640px — выезжает снизу ──────────────────── */
+@media (max-width: 640px) {
+  #case-modal-ovl {
+    padding: 0;
+    align-items: flex-end;
+    /* На маленьких — оверлей без скролла,
+       скроллит только контент внутри */
+    overflow: hidden;
+  }
+  #case-modal-box {
+    grid-template-columns: 1fr;
+    grid-template-rows: 240px 1fr;
+    /* Высота = экран минус небольшой отступ сверху */
+    height: 94vh;
+    max-width: 100%;
+    border-radius: 20px 20px 0 0;
+    /* Анимация снизу вверх */
+    transform: translateY(100%);
+    transition: transform .32s cubic-bezier(.25,.8,.25,1);
+  }
+  #case-modal-ovl.sc-visible #case-modal-box {
+    transform: translateY(0);
+  }
+  #case-gallery-col {
+    height: 100%;
+    border-right: none;
+    border-bottom: 1px solid rgba(255,255,255,.06);
+  }
+  #case-gallery-track {
+    /* На мобильном минимальная высота явно */
+    min-height: 200px;
+  }
+  #case-content-col {
+    height: 100%;
+    padding: 16px 16px 32px;
+    gap: 12px;
+  }
+  .cc-title {
+    font-size: .95rem;
+  }
+  .cc-conv-block {
+    padding: 14px;
+    gap: 11px;
+  }
+  .cc-conv-item {
+    font-size: .78rem;
+  }
+  .cc-btn-primary {
+    height: 46px;
+    font-size: .85rem;
+  }
+  .cc-btn-tg {
+    height: 42px;
+  }
+  #case-close-btn {
+    top: 10px;
+    right: 10px;
+    width: 30px;
+    height: 30px;
+    font-size: 14px;
+  }
+  .sc-arr {
+    width: 32px;
+    height: 32px;
+  }
+  .sc-arr-prev { left: 6px; }
+  .sc-arr-next { right: 6px; }
+}
+
+/* ── Маленький телефон ≤400px ────────────────────────────── */
+@media (max-width: 400px) {
+  #case-modal-box {
+    grid-template-rows: 200px 1fr;
+    height: 96vh;
+  }
+  .cc-title {
+    font-size: .88rem;
+  }
+  .cc-conv-item {
+    font-size: .75rem;
+  }
+  .cc-buttons { gap: 8px; }
+}
+
+/* ── Карточки сетки на мобильном ─────────────────────────── */
+@media (max-width: 480px) {
+  .sc-pcard-foot {
+    padding: 12px 14px 13px;
+  }
+  .sc-pcard-foot-title {
+    font-size: .8rem;
+  }
+  .sc-pcard-cat-badge {
+    font-size: .64rem;
+    padding: 3px 9px;
+  }
+}
+
+/* ══════════════════════════════════════════════════════════
+   7. FEATURE QUERIES
+══════════════════════════════════════════════════════════ */
+
+@supports not (backdrop-filter: blur(1px)) {
+  #case-modal-ovl {
+    background: rgba(4,4,14,.96);
+  }
+  .sc-pcard-cat-badge {
+    backdrop-filter: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sc-pcard,
+  .sc-pcard-photo img,
+  .sc-pcard-foot-arrow,
+  #case-gallery-track,
+  #case-modal-box,
+  #case-modal-ovl,
+  .sc-arr,
+  .sc-dot {
+    transition: none !important;
+    animation: none !important;
+  }
+}
+/* ══════════════════════════════════════════════════════════
+   LIGHTBOX — полноэкранный просмотр поверх всего
+══════════════════════════════════════════════════════════ */
+
+#sc-lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 99999; /* выше модала (9999) */
+  background: rgba(0,0,0,.96);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity .22s ease;
+  /* touch-action — разрешаем горизонтальный свайп */
+  touch-action: pan-y;
+  overscroll-behavior: contain;
+}
+@supports (backdrop-filter: blur(1px)) {
+  #sc-lightbox {
+    backdrop-filter: blur(2px);
+    -webkit-backdrop-filter: blur(2px);
+  }
+}
+#sc-lightbox.lb-visible {
+  display: flex;
+  opacity: 0; /* анимация через rAF */
+}
+#sc-lightbox.lb-open {
+  opacity: 1;
+}
+
+/* Область трека — занимает всё пространство между кнопками */
+#sc-lb-track-wrap {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Трек слайдов */
+#sc-lb-track {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: 100%;
+  transition: transform .38s cubic-bezier(.25,.8,.25,1);
+  will-change: transform;
+  align-items: center;
+}
+
+/* Слайд лайтбокса */
+.sc-lb-slide {
+  flex: 0 0 100%;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 80px 80px; /* отступы от краёв */
+}
+.sc-lb-slide img {
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  display: block;
+  border-radius: 6px;
+  box-shadow: 0 24px 80px rgba(0,0,0,.7);
+  /* Нет pointer-events — чтобы свайп работал поверх */
+  pointer-events: none;
+  user-select: none;
+  -webkit-user-drag: none;
+  transition: opacity .2s ease;
+}
+.sc-lb-slide .sc-slide-placeholder {
+  color: rgba(255,255,255,.25);
+}
+
+/* Мобильные отступы меньше */
+@media (max-width: 640px) {
+  .sc-lb-slide {
+    padding: 56px 12px 72px;
+  }
+}
+
+/* ── Кнопка закрытия ─────────────────────────────────────── */
+#sc-lb-close {
+  position: fixed;
+  top: 16px;
+  right: 16px;
+  z-index: 10;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: rgba(255,255,255,.1);
+  border: 1px solid rgba(255,255,255,.2);
+  color: #fff;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background .15s, transform .15s;
+  flex-shrink: 0;
+}
+#sc-lb-close:hover {
+  background: rgba(255,255,255,.22);
+  transform: scale(1.1);
+}
+
+/* ── Стрелки ─────────────────────────────────────────────── */
+.sc-lb-arr {
+  position: fixed;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: rgba(255,255,255,.1);
+  border: 1px solid rgba(255,255,255,.2);
+  color: #fff;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background .15s, transform .15s;
+  flex-shrink: 0;
+}
+.sc-lb-arr:hover {
+  background: rgba(255,255,255,.22);
+  transform: translateY(-50%) scale(1.08);
+}
+.sc-lb-arr:disabled {
+  opacity: .2;
+  pointer-events: none;
+}
+.sc-lb-prev { left: 16px; }
+.sc-lb-next { right: 16px; }
+
+/* На мобильном стрелки меньше и ближе к краю */
+@media (max-width: 640px) {
+  .sc-lb-arr {
+    width: 40px;
+    height: 40px;
+  }
+  .sc-lb-prev { left: 8px; }
+  .sc-lb-next { right: 8px; }
+}
+
+/* ── Счётчик ─────────────────────────────────────────────── */
+#sc-lb-counter {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+  background: rgba(0,0,0,.55);
+  color: rgba(255,255,255,.8);
+  font-size: 13px;
+  font-weight: 500;
+  padding: 5px 14px;
+  border-radius: 20px;
+  pointer-events: none;
+  white-space: nowrap;
+  display: none;
+}
+
+/* ── Точки ───────────────────────────────────────────────── */
+#sc-lb-dots {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  padding: 8px 16px;
+  background: rgba(0,0,0,.45);
+  border-radius: 20px;
+  pointer-events: all;
+}
+.sc-lb-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: rgba(255,255,255,.3);
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  transition: all .22s ease;
+  flex-shrink: 0;
+}
+.sc-lb-dot.active {
+  background: #fff;
+  width: 20px;
+  border-radius: 4px;
+}
+.sc-lb-dot:hover:not(.active) {
+  background: rgba(255,255,255,.6);
+}
+
+/* Скрываем точки если слайд один */
+#sc-lb-dots:empty {
+  display: none;
+}
+
+/* ── Анимация появления картинки ─────────────────────────── */
+@keyframes lbImgIn {
+  from { opacity: 0; transform: scale(.96); }
+  to   { opacity: 1; transform: scale(1);   }
+}
+.sc-lb-slide img.lb-img-anim {
+  animation: lbImgIn .25s ease forwards;
+}

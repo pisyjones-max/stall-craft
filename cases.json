@@ -1,0 +1,45 @@
+{
+  "canopies": [
+    "img/portfolio/canopies/canopies_1.png",
+    "img/portfolio/canopies/canopies_10.png",
+    "img/portfolio/canopies/canopies_11.jpeg",
+    "img/portfolio/canopies/canopies_12.png",
+    "img/portfolio/canopies/canopies_13.png",
+    "img/portfolio/canopies/canopies_14.jpeg",
+    "img/portfolio/canopies/canopies_15.jpg",
+    "img/portfolio/canopies/canopies_2.png",
+    "img/portfolio/canopies/canopies_3.png",
+    "img/portfolio/canopies/canopies_5.png",
+    "img/portfolio/canopies/canopies_6.png",
+    "img/portfolio/canopies/canopies_7.png",
+    "img/portfolio/canopies/canopies_8.png",
+    "img/portfolio/canopies/canopies_9.jpeg"
+  ],
+  "garages": [
+    "img/portfolio/garages/garages_1.jpeg",
+    "img/portfolio/garages/garages_10.jpeg",
+    "img/portfolio/garages/garages_11.jpeg",
+    "img/portfolio/garages/garages_12.png",
+    "img/portfolio/garages/garages_13.png",
+    "img/portfolio/garages/garages_14.png",
+    "img/portfolio/garages/garages_4.png",
+    "img/portfolio/garages/garages_5.png",
+    "img/portfolio/garages/garages_6.jpeg",
+    "img/portfolio/garages/garages_7.jpeg",
+    "img/portfolio/garages/garages_9.jpeg"
+  ],
+  "gates": [
+    "img/portfolio/gates/gates_1.jpeg",
+    "img/portfolio/gates/gates_10.png",
+    "img/portfolio/gates/gates_11.jpg",
+    "img/portfolio/gates/gates_12.jpg",
+    "img/portfolio/gates/gates_13.jpg",
+    "img/portfolio/gates/gates_3.jpeg",
+    "img/portfolio/gates/gates_4.jpeg",
+    "img/portfolio/gates/gates_5.jpeg",
+    "img/portfolio/gates/gates_6.jpeg",
+    "img/portfolio/gates/gates_7.jpeg",
+    "img/portfolio/gates/gates_8.jpeg",
+    "img/portfolio/gates/gates_9.png"
+  ]
+}

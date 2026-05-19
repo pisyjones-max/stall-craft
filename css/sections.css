@@ -1,0 +1,47 @@
+/* CATEGORIES */
+.cat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.cat-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--rl);overflow:hidden;display:flex;flex-direction:column;cursor:pointer;transition:transform .22s,box-shadow .22s;text-decoration:none;color:var(--text)}
+.cat-card:hover{transform:translateY(-5px);box-shadow:var(--sh-lg)}
+.cat-media{height:220px;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center}
+.cat-card[data-cat="carport"] .cat-media{background:linear-gradient(140deg,#1a3b24,#2d6038,#1f4a2b)}
+.cat-card[data-cat="garage"]  .cat-media{background:linear-gradient(140deg,#1c2420,#2a3830,#192c1e)}
+.cat-card[data-cat="gates"]   .cat-media{background:linear-gradient(140deg,#1a2135,#263250,#151e3a)}
+.cat-media::before{content:'';position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px);background-size:36px 36px}
+.cat-media-icon{font-size:68px;position:relative;z-index:1;filter:drop-shadow(0 6px 20px rgba(0,0,0,.4))}
+.cat-media-badge{position:absolute;top:12px;left:12px;z-index:2}
+.cat-media-shimmer{position:absolute;inset:0;z-index:2;pointer-events:none;background:linear-gradient(135deg,rgba(255,255,255,.07) 0%,transparent 50%,rgba(0,0,0,.1) 100%)}
+.cat-body{padding:20px;flex:1;display:flex;flex-direction:column;gap:10px}
+.cat-title{font-family:var(--fh);font-size:16px;font-weight:700;color:var(--dark)}
+.cat-desc{font-size:13px;color:var(--muted);line-height:1.68;flex:1}
+.cat-tags{display:flex;flex-wrap:wrap;gap:5px}
+.ctag{padding:4px 11px;border-radius:20px;font-size:11px;font-weight:500;background:var(--tag);color:var(--muted)}
+.cat-footer{display:flex;align-items:center;justify-content:space-between;padding-top:14px;border-top:1px solid var(--border);margin-top:4px}
+.cat-price-lbl{font-size:10.5px;color:var(--muted);margin-bottom:2px}
+.cat-price{font-family:var(--fh);font-size:19px;font-weight:700;color:var(--accent)}
+.cat-price small{font-size:12px;font-family:var(--fb);color:var(--muted)}
+.cat-arrow-btn{width:40px;height:40px;border-radius:10px;background:var(--dark);border:none;color:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .15s,transform .15s;flex-shrink:0}
+.cat-arrow-btn:hover{background:var(--dark-h);transform:scale(1.06)}
+
+/* BENEFITS */
+.ben-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.ben-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--rl);padding:24px;display:flex;flex-direction:column;gap:14px;transition:transform .2s,box-shadow .2s}
+.ben-card:hover{transform:translateY(-3px);box-shadow:var(--sh-md)}
+.ben-icon{width:48px;height:48px;border-radius:12px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.ben-icon.red{background:#FFEDE8;color:var(--accent)}.ben-icon.green{background:#E8F5EE;color:var(--success)}
+.ben-icon.gold{background:var(--gold-bg);color:var(--gold)}.ben-icon.dark{background:var(--tag);color:var(--dark)}
+.ben-icon.blue{background:#E6F3FB;color:#0a5c8a}
+.ben-title{font-family:var(--fh);font-size:14px;font-weight:600;color:var(--dark)}
+.ben-desc{font-size:13px;color:var(--muted);line-height:1.65}
+
+/* PROCESS */
+.process-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;position:relative}
+.process-grid::before{content:'';position:absolute;top:36px;left:10%;right:10%;height:2px;z-index:0;background:repeating-linear-gradient(90deg,var(--border) 0,var(--border) 8px,transparent 8px,transparent 18px)}
+.proc-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--rl);padding:22px;text-align:center;position:relative;z-index:1;transition:transform .2s,box-shadow .2s}
+.proc-card:hover{transform:translateY(-3px);box-shadow:var(--sh-md)}
+.proc-num{width:52px;height:52px;border-radius:14px;background:var(--dark);color:#fff;font-family:var(--fh);font-size:18px;font-weight:700;display:flex;align-items:center;justify-content:center;margin:0 auto 16px}
+.proc-card:nth-child(2) .proc-num{background:var(--accent)}
+.proc-card:nth-child(3) .proc-num{background:var(--success)}
+.proc-card:nth-child(4) .proc-num{background:var(--gold)}
+.proc-icon{font-size:28px;margin-bottom:12px}
+.proc-title{font-family:var(--fh);font-size:13px;font-weight:600;color:var(--dark);margin-bottom:8px}
+.proc-desc{font-size:12.5px;color:var(--muted);line-height:1.65}

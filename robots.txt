@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://ads.msk.ru/craft/sitemap.xml
+
+Disallow: /api/
+Disallow: /.env
