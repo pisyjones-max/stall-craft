@@ -3,19 +3,17 @@
  * Секреты (токены, пароли) — только на сервере в .env
  */
 window.SC_CONFIG = {
-  phone:        '+79959044085',
-  phoneDisplay: '+7 (995) 904-40-85',
-  email:        '9775471351@mail.ru',
-  emailCC:      'sysoeveg@yandex.ru',
+  phone:        '+79332033005',
+  phoneDisplay: '+7 (933) 203-30-05',
   tgLink:       'https://t.me/+79154683925',
   vkLink:       'https://vk.com/club234525361',
-  address:      'г. Раменское, ул. Нефтегазосъёмки, 19',
-  workHours:    'Пн–Пт 8:00–19:00 · Сб 9:00–17:00',
+  address:      'Новохаритоново, Московская область',
+  workHours:    'Пн–Пт 9:00–18:00 · Сб 9:00–15:00',
   devName:      'Novation',
   devLink:      'https://sale.ads.msk.ru/',
   devPhone:     '+7 915 468-39-25',
-  apiEndpoint:  '/craft/api/lead.php',
-  imgBase:      'https://sk-craft.ru/img/portfolio',
+  apiEndpoint:  '/api/lead',
+  imgBase:      'https://sk-craft.platforma-msk.ru/img/portfolio',
 };
 
 /** Данные кейсов */
@@ -31,9 +29,9 @@ window.SC_CASES = [
     results:['Установлено за 1 рабочий день без земляных работ','Конструкция выдерживает снеговую нагрузку до 180 кг/м²','Клиент сэкономил 40% по сравнению с капитальным строением'],
     tags:['Поликарбонат','Двойной','6×5 м','RAL 6005'],
     images:[
-      'https://sk-craft.ru/img/portfolio/canopies/canopy-main.webp',
-      'https://sk-craft.ru/img/portfolio/canopies/202604151040.webp',
-      'https://sk-craft.ru/img/portfolio/canopies/canopy-bench.webp',
+      'https://sk-craft.platforma-msk.ru/img/portfolio/canopies/canopy-main.webp',
+      'https://sk-craft.platforma-msk.ru/img/portfolio/canopies/202604151040.webp',
+      'https://sk-craft.platforma-msk.ru/img/portfolio/canopies/canopy-bench.webp',
     ],
   },
   {
@@ -47,8 +45,8 @@ window.SC_CASES = [
     results:['Смонтировано за половину рабочего дня','Цвет профнастила точно совпал с кровлей дома','Конструкция не требует обслуживания 5+ лет'],
     tags:['Профнастил','МП-20','3×3.5 м'],
     images:[
-      'https://sk-craft.ru/img/portfolio/canopies/canopy-bench.webp',
-      'https://sk-craft.ru/img/portfolio/canopies/canopy-main.webp',
+      'https://sk-craft.platforma-msk.ru/img/portfolio/canopies/canopy-bench.webp',
+      'https://sk-craft.platforma-msk.ru/img/portfolio/canopies/canopy-main.webp',
     ],
   },
   {
@@ -62,10 +60,10 @@ window.SC_CASES = [
     results:['Температура в гараже при -20°C держится на уровне +5°C','Сэкономлено 65% бюджета по сравнению с кирпичным гаражом','Монтаж завершён за 1 рабочий день'],
     tags:['Утеплённый','4×6 м','Сэндвич-панели','Секционные ворота'],
     images:[
-      'https://sk-craft.ru/img/portfolio/garages/garage-winter.webp',
-      'https://sk-craft.ru/img/portfolio/garages/202604151040.webp',
-      'https://sk-craft.ru/img/portfolio/garages/7.webp',
-      'https://sk-craft.ru/img/portfolio/garages/8.webp',
+      'https://sk-craft.platforma-msk.ru/img/portfolio/garages/garage-winter.webp',
+      'https://sk-craft.platforma-msk.ru/img/portfolio/garages/202604151040.webp',
+      'https://sk-craft.platforma-msk.ru/img/portfolio/garages/7.webp',
+      'https://sk-craft.platforma-msk.ru/img/portfolio/garages/8.webp',
     ],
   },
   {
@@ -79,8 +77,8 @@ window.SC_CASES = [
     results:['Старая конструкция демонтирована и вывезена нашей командой','Новый гараж установлен точно в размер отведённого места','Документация для кооператива предоставлена'],
     tags:['Стандарт','3×6 м','Распашные ворота'],
     images:[
-      'https://sk-craft.ru/img/portfolio/garages/11.webp',
-      'https://sk-craft.ru/img/portfolio/garages/13.webp',
+      'https://sk-craft.platforma-msk.ru/img/portfolio/garages/11.webp',
+      'https://sk-craft.platforma-msk.ru/img/portfolio/garages/13.webp',
     ],
   },
   {
@@ -94,9 +92,9 @@ window.SC_CASES = [
     results:['Ворота открываются за 12 секунд полного цикла','Интеграция с домофоном и видеонаблюдением выполнена','Клиент управляет с телефона через фирменное приложение FAAC'],
     tags:['Откатные','4×2.1 м','FAAC 740','Смартфон'],
     images:[
-      'https://sk-craft.ru/img/portfolio/gates/9.webp',
-      'https://sk-craft.ru/img/portfolio/gates/gates-frame-brick.webp',
-      'https://sk-craft.ru/img/portfolio/gates/gates-installation-process.webp',
+      'https://sk-craft.platforma-msk.ru/img/portfolio/gates/9.webp',
+      'https://sk-craft.platforma-msk.ru/img/portfolio/gates/gates-frame-brick.webp',
+      'https://sk-craft.platforma-msk.ru/img/portfolio/gates/gates-installation-process.webp',
     ],
   },
   {
@@ -110,8 +108,8 @@ window.SC_CASES = [
     results:['Шум при открытии ворот не слышен в соседних секциях','Тепловой контур сохраняет тепло при -30°C','Встроенная Wi-Fi-модуль для управления с телефона'],
     tags:['Секционные','5×2.5 м','Hormann','ProMatic','Premium'],
     images:[
-      'https://sk-craft.ru/img/portfolio/gates/gates-grey-lamels.webp',
-      'https://sk-craft.ru/img/portfolio/gates/canopy-bench.webp',
+      'https://sk-craft.platforma-msk.ru/img/portfolio/gates/gates-grey-lamels.webp',
+      'https://sk-craft.platforma-msk.ru/img/portfolio/gates/canopy-bench.webp',
     ],
   },
 ];

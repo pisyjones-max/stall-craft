@@ -1,7 +1,4 @@
 {
-  "dependencies": {
-    "clsx": "^2.1.1",
-    "framer-motion": "^12.38.0",
-    "tailwind-merge": "^3.5.0"
-  }
+  "name": "sk-craft",
+  "private": true
 }

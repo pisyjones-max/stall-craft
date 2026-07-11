@@ -2,18 +2,16 @@
  * config.js — публичные настройки (без секретов!)
  */
 window.SC_CONFIG = {
-  phone:        '+79252055299',
-  phoneDisplay: '+7 (925) 205-52-99',
-  email:        '9252055299@mail.ru',
-  emailCC:      'sysoeveg@yandex.ru',
-  tgLink:       'https://t.me/+79252055299',
+  phone:        '+79332033005',
+  phoneDisplay: '+7 (933) 203-30-05',
+  tgLink:       'https://t.me/+79154683925',
   vkLink:       'https://vk.com/club234525361',
-  address:      'г. Раменское, ул. Нефтегазосъёмки, 19',
-  workHours:    'Пн–Пт 8:00–19:00 · Сб 9:00–17:00',
+  address:      'Новохаритоново, Московская область',
+  workHours:    'Пн–Пт 9:00–18:00 · Сб 9:00–15:00',
   devName:      'Novation',
   devLink:      'https://sale.ads.msk.ru/',
   devPhone:     '+7 915 468-39-25',
-  apiEndpoint:  '/craft/api/lead.php',
+  apiEndpoint:  '/api/lead',
 };
 
 /* ── КОНВЕРСИОННЫЕ БЛОКИ ПО КАТЕГОРИЯМ ───────────────────── */
