@@ -1,4 +1,7 @@
 {
   "name": "sk-craft",
-  "private": true
+  "private": true,
+  "dependencies": {
+    "marked": "^18.0.6"
+  }
 }
