@@ -1,0 +1,49 @@
+name: Сгенерировать статью блога (черновик в PR)
+
+# Запускается вручную из вкладки Actions: указываешь тему — получаешь PR с готовой
+# статьёй и уже сгенерированными HTML-страницами. Мержишь PR в main — Vercel
+# задеплоит статически на пуш.
+on:
+  workflow_dispatch:
+    inputs:
+      topic:
+        description: 'Тема статьи (например: Ворота откатные или распашные)'
+        required: true
+        type: string
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - run: npm install marked --no-save
+
+      - name: Генерация черновика статьи
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: node scripts/generate-article.mjs "${{ inputs.topic }}"
+
+      - name: Генерация HTML-страниц и sitemap
+        run: node scripts/build-blog.mjs
+
+      - name: Открыть Pull Request с черновиком
+        uses: peter-evans/create-pull-request@v6
+        with:
+          commit-message: "blog: черновик статьи — ${{ inputs.topic }}"
+          branch: "blog-draft/${{ github.run_id }}"
+          title: "Черновик статьи: ${{ inputs.topic }}"
+          body: |
+            Автоматически сгенерированный черновик по теме «${{ inputs.topic }}».
+            Проверь текст перед мержем.
+          add-paths: |
+            content/blog/*.json
+            blog/**
+            sitemap.xml
